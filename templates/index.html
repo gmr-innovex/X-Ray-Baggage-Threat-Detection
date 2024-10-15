@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>YOLOv8 Object Detection</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .container {
+        max-width: 500px;
+        width: 200%;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-control-file {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ced4da;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .btn-primary {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .btn-primary:hover {
+        background-color: #0056b3;
+      }
+      .images-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      .img-container {
+        flex: 1;
+        padding: 10px;
+      }
+      .img-fluid {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        padding: 5px;
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Prohibited items detection</h1>
+      <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="file">Choose file</label>
+          <input type="file" class="form-control-file" id="file" name="file" required>
+        </div>
+        <button type="submit" class="btn-primary">Upload</button>
+      </form>
+      {% if uploaded_image or predicted_image %}
+        <div class="images-container">
+          {% if uploaded_image %}
+            <div class="img-container">
+              <h2>Uploaded Image</h2>
+              <img src="{{ url_for('uploaded_file', filename=uploaded_image) }}" class="img-fluid">
+            </div>
+          {% endif %}
+          {% if predicted_image %}
+            <div class="img-container">
+              <h2>Predicted Image</h2>
+              <img src="{{ url_for('uploaded_file', filename=predicted_image) }}" class="img-fluid">
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
